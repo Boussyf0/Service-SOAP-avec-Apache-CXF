@@ -26,22 +26,22 @@ WSDL : **http://localhost:8080/services/hello?wsdl**
 ## 📸 Tests avec SoapUI
 
 ### Projet créé
-![SoapUI Projet](Screen/01-soapui-projet.png)
+![SoapUI Projet](Screen/Screenshot%202025-11-09%20at%2023.57.56.png)
 
 ### Opérations disponibles
-![SoapUI Opérations](Screen/02-soapui-operations.png)
+![SoapUI Opérations](Screen/Screenshot%202025-11-09%20at%2023.58.59.png)
 
 ### Requête SOAP
-![Test Requête](Screen/03-test-requete.png)
+![Test Requête](Screen/Screenshot%202025-11-10%20at%2000.26.24.png)
 
 ### Réponse du service
-![Test Réponse](Screen/04-test-reponse.png)
+![Test Réponse](Screen/Screenshot%202025-11-10%20at%2000.28.21.png)
 
 ### Configuration WS-Security
-![Configuration Auth](Screen/05-configuration-auth.png)
+![Configuration Auth](Screen/Screenshot%202025-11-10%20at%2000.43.46.png)
 
 ### Résultat avec authentification
-![Résultat Final](Screen/06-resultat-final.png)
+![Résultat Final](Screen/Screenshot%202025-11-10%20at%2000.46.46.png)
 
 ## 📝 Opérations
 
