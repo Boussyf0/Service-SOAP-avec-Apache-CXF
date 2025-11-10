@@ -1,18 +1,8 @@
 # Service SOAP avec Apache CXF
 
-Service web SOAP utilisant Apache CXF et JAX-WS, conforme aux standards Java EE pour les services web.
-
-## 🎯 Objectif
-
-Créer et tester un service SOAP offrant deux opérations :
-1. **SayHello** : Retourne un message de salutation personnalisé
-2. **FindPerson** : Retourne un objet Person sérialisé en XML
+Service web SOAP sécurisé avec Apache CXF et JAX-WS.
 
 ## 🚀 Démarrage rapide
-
-### Prérequis
-- Java 11+
-- Maven 3.6+
 
 ### Lancer le serveur
 ```bash
@@ -21,129 +11,62 @@ Créer et tester un service SOAP offrant deux opérations :
 
 Le service sera accessible à : **http://localhost:8080/services/hello**
 
-WSDL disponible à : **http://localhost:8080/services/hello?wsdl**
+WSDL : **http://localhost:8080/services/hello?wsdl**
 
-## 📁 Structure du projet
-
-```
-src/main/java/com/acme/cxf/
-├── Server.java                 # Serveur principal (démarrage)
-├── api/
-│   └── HelloService.java       # Interface du service (@WebService)
-├── impl/
-│   └── HelloServiceImpl.java   # Implémentation du service
-└── model/
-    └── Person.java             # Modèle de données JAXB
-```
-
-## 🧪 Tests
-
-### Avec curl
-
-**Test SayHello :**
+### Tester avec le client Java
 ```bash
-curl -X POST -H "Content-Type: text/xml" \
-  -d @test-sayHello.xml \
-  http://localhost:8080/services/hello
+./run-client.sh
 ```
 
-**Réponse :**
-```xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-      <ns2:SayHelloResponse xmlns:ns2="http://api.cxf.acme.com/">
-         <greeting>Bonjour, Lachgar</greeting>
-      </ns2:SayHelloResponse>
-   </soap:Body>
-</soap:Envelope>
-```
+## 🔐 Sécurité
 
-**Test FindPerson :**
-```bash
-curl -X POST -H "Content-Type: text/xml" \
-  -d @test-findPerson.xml \
-  http://localhost:8080/services/hello
-```
+- **Username** : `student`
+- **Password** : `secret123`
 
-**Réponse :**
-```xml
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-      <ns2:FindPersonResponse xmlns:ns2="http://api.cxf.acme.com/">
-         <person>
-            <age>36</age>
-            <id>P-001</id>
-            <name>Ada Lovelace</name>
-         </person>
-      </ns2:FindPersonResponse>
-   </soap:Body>
-</soap:Envelope>
-```
+## 📸 Tests avec SoapUI
 
-### Avec SoapUI
+### Projet créé
+![SoapUI Projet](Screen/01-soapui-projet.png)
 
-Voir le guide détaillé : [GUIDE_SOAPUI.md](GUIDE_SOAPUI.md)
+### Opérations disponibles
+![SoapUI Opérations](Screen/02-soapui-operations.png)
 
-## 🛠️ Technologies utilisées
+### Requête SOAP
+![Test Requête](Screen/03-test-requete.png)
 
-| Technologie | Version | Rôle |
-|-------------|---------|------|
-| Apache CXF | 3.5.5 | Framework SOAP |
-| JAX-WS API | 2.3.1 | API Web Services |
-| JAXB | 2.3.5 | Sérialisation XML |
-| Jetty | 9.x | Serveur HTTP embarqué |
-| Java | 11+ | Plateforme |
+### Réponse du service
+![Test Réponse](Screen/04-test-reponse.png)
 
-## 📝 Fonctionnalités
+### Configuration WS-Security
+![Configuration Auth](Screen/05-configuration-auth.png)
 
-### Opération SayHello
+### Résultat avec authentification
+![Résultat Final](Screen/06-resultat-final.png)
+
+## 📝 Opérations
+
+### SayHello
 - **Entrée** : String name
 - **Sortie** : String greeting
-- **Exemple** : "Lachgar" → "Bonjour, Lachgar"
 
-### Opération FindPerson
+### FindPerson
 - **Entrée** : String id
-- **Sortie** : Person object
-- **Champs** : id, name, age
-- **Exemple** : "P-001" → Person(id="P-001", name="Ada Lovelace", age=36)
+- **Sortie** : Person (id, name, age)
 
-## 🔧 Configuration Maven
+## 🛠️ Technologies
 
-Le projet utilise :
-- `cxf-rt-frontend-jaxws` : Support JAX-WS
-- `cxf-rt-transports-http-jetty` : Transport HTTP avec Jetty
-- `jaxws-api` et `jaxws-rt` : API et runtime JAX-WS
+- Apache CXF 3.5.5
+- JAX-WS API 2.3.1
+- WS-Security UsernameToken
+- Java 11+
 
-## 📦 Build
+## 📚 Documentation
 
-```bash
-mvn clean package
-```
-
-## 🎓 Points d'apprentissage
-
-1. **Annotations JAX-WS** : `@WebService`, `@WebMethod`, `@WebParam`, `@WebResult`
-2. **Annotations JAXB** : `@XmlRootElement`, `@XmlElement`
-3. **Apache CXF** : Configuration et déploiement d'un service SOAP
-4. **Contrat WSDL** : Génération automatique depuis le code Java
-5. **Sérialisation** : Transformation automatique Java ↔ XML
-
-## ✅ Résultat attendu (Étape 7)
-
-- ✅ Service SOAP démarré et accessible
-- ✅ WSDL généré et consultable
-- ✅ Opération SayHello retourne une salutation
-- ✅ Opération FindPerson retourne un objet Person sérialisé
-- ✅ Tests réussis avec SoapUI ou curl
-- ✅ Conformité contractuelle validée
-
-## 📚 Ressources
-
-- [Apache CXF Documentation](https://cxf.apache.org/)
-- [JAX-WS Tutorial](https://docs.oracle.com/javaee/7/tutorial/jaxws.htm)
-- [JAXB Tutorial](https://docs.oracle.com/javase/tutorial/jaxb/)
+- [GUIDE_SOAPUI.md](GUIDE_SOAPUI.md) - Guide détaillé SoapUI
+- [CHECKLIST_VALIDATION_FINALE.txt](CHECKLIST_VALIDATION_FINALE.txt) - Validation complète
+- [SCENARIO_SOAPUI_SCREENSHOTS.txt](SCENARIO_SOAPUI_SCREENSHOTS.txt) - Scénario de test
 
 ---
 
-**Auteur** : Projet d'apprentissage SOAP avec Apache CXF  
+**Auteur** : Projet SOAP avec Apache CXF  
 **Date** : 2025
